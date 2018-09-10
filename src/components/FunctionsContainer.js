@@ -5,6 +5,7 @@ import { withStyles } from '@material-ui/core/styles';
 import { observer } from 'mobx-react';
 import model from '../model';
 import InputButton from './InputButton';
+import Button from 'Button';
 import Player from './Player';
 
 
@@ -44,6 +45,7 @@ class FunctionsContainer extends React.Component {
         return (
             <div className={classes.root}>
                 <InputButton handleUpload={this.handleUpload}/>
+                <Button component="span" className={classes.button}>Lyrics</Button>
             </div>
         )
     };
