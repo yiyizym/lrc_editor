@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 
 import Paper from '@material-ui/core/Paper';
-import MusicPlayer from './MusicPlayer';
-import FunctionsContainer from './FunctionsContainer';
+import PlayPanel from './PlayPanel';
+import ButtonsContainer from './ButtonsContainer';
 
 const styles = theme => ({
     root: {
@@ -19,8 +19,8 @@ class ControllPanel extends React.Component {
         return(
             <div>
                 <Paper className={classes.root} elevation={1}>
-                    <MusicPlayer></MusicPlayer>
-                    <FunctionsContainer></FunctionsContainer>
+                    <PlayPanel></PlayPanel>
+                    <ButtonsContainer></ButtonsContainer>
                 </Paper>
             </div>
         )

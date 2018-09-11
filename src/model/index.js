@@ -2,6 +2,7 @@ import { observable } from 'mobx';
 
 class Model {
   @observable player = null;
+  @observable playing = false;
   @observable showEditor = false;
   @observable rawLyrics = [{
     time: '00:01:96',

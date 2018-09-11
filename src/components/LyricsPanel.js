@@ -38,7 +38,10 @@ class LyricsPanel extends React.Component {
             <TableBody>
               {model.rawLyrics.map((item, index) => {
                 return (
-                  <TableRow key={index}>
+                  <TableRow
+                    key={index}
+                    hover
+                    >
                     <TableCell>{item.time}</TableCell>
                     <TableCell>{item.lyrics}</TableCell>
                   </TableRow>

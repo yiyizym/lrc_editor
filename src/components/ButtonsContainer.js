@@ -31,14 +31,18 @@ const styles = theme => ({
 })
 
 @observer
-class FunctionsContainer extends React.Component {
+class ButtonsContainer extends React.Component {
   createPlayer = async (file) => {
     if (model.player) {
       model.player.destroy();
+      model.player = null;
     }
     model.player = await new Player(file);
-    console.log(model.player.getSongName());
-
+    this.addEventListener();
+  }
+  addEventListener = () => {
+    if(!model.player) return;
+    model.player.on('end', () => model.playing = false);
   }
   render() {
     const { classes } = this.props;
@@ -56,4 +60,4 @@ class FunctionsContainer extends React.Component {
   };
 }
 
-export default withStyles(styles)(FunctionsContainer);
+export default withStyles(styles)(ButtonsContainer);
