@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom';
 import CssBaseline from '@material-ui/core/CssBaseline';
 
 import ControllPanel from './ControllPanel';
-// import LyricsPanel from './LyricsPanel';
+import LyricsPanel from './LyricsPanel';
+import LyricsModal from './LyricsModal';
 
 function App() {
     return (
@@ -14,8 +15,9 @@ function App() {
                     margin: '0 auto'
                 }}>
                     <ControllPanel></ControllPanel>
-                    {/* <LyricsPanel></LyricsPanel> */}
+                    <LyricsPanel></LyricsPanel>
                 </div>
+            <LyricsModal></LyricsModal>
             </CssBaseline>
         </React.Fragment>
     );
