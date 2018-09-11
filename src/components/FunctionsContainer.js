@@ -10,45 +10,50 @@ import Player from './Player';
 
 
 const styles = theme => ({
-    root: {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'flex-start',
-    },
-    btn: {
-        width: '25%',
-        height: '50px',
-        position: 'relative'
-    },
-    fileInput: {
-        position: 'absolute',
-        opacity: 0,
-        top: 0,
-        bottom: 0,
-        left: 0,
-        right: 0,
-    }
+  root: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+  },
+  btn: {
+    width: '25%',
+    height: '50px',
+    position: 'relative'
+  },
+  fileInput: {
+    position: 'absolute',
+    opacity: 0,
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
+  }
 })
 
 @observer
 class FunctionsContainer extends React.Component {
-    handleUpload = async (file) => {
-        if(model.player){
-            model.player.destroy();
-        }
-        model.player = await new Player(file);
-        console.log(model.player.getSongName());
-
+  createPlayer = async (file) => {
+    if (model.player) {
+      model.player.destroy();
     }
-    render() {
-        const { classes } = this.props;
-        return (
-            <div className={classes.root}>
-                <InputButton handleUpload={this.handleUpload}/>
-                <Button component="span" className={classes.button}>Lyrics</Button>
-            </div>
-        )
-    };
+    model.player = await new Player(file);
+    console.log(model.player.getSongName());
+
+  }
+  render() {
+    const { classes } = this.props;
+    return (
+      <div className={classes.root}>
+        <InputButton handleUpload={this.createPlayer} />
+        <Button 
+          component="span" 
+          handleClick={() => model.showEditor = true} 
+          className={classes.button}>
+          Lyrics
+        </Button>
+      </div>
+    )
+  };
 }
 
 export default withStyles(styles)(FunctionsContainer);
