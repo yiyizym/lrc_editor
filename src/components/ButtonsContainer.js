@@ -13,7 +13,7 @@ const styles = theme => ({
   root: {
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'flex-start',
+    justifyContent: 'flex-end',
   },
   btn: {
     width: '25%',
@@ -27,6 +27,9 @@ const styles = theme => ({
     bottom: 0,
     left: 0,
     right: 0,
+  },
+  button: {
+    margin: theme.spacing.unit,
   }
 })
 
@@ -53,7 +56,7 @@ class ButtonsContainer extends React.Component {
           component="span"
           onClick={() => model.showEditor = true}
           className={classes.button}>
-          Lyrics
+          上传歌词
         </Button>
       </div>
     )
