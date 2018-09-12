@@ -61,7 +61,7 @@ class PlayPanel extends React.Component {
     return (
       <div className={classes.root}>
         <Button
-          disabled={model.player === null}
+          disabled={model.songLoaded === false}
           className={classes.button}
           aria-label="Play"
           onClick={this.togglePlaySong}
@@ -69,7 +69,7 @@ class PlayPanel extends React.Component {
           {model.playing ? '暂停' : this.comeToEnding() ? '重放' : '播放'}
         </Button>
         <Button
-          disabled={model.player === null}
+          disabled={model.songLoaded === false}
           className={classes.button}
           aria-label="MakeTag"
           onClick={this.makeTag}
@@ -77,7 +77,7 @@ class PlayPanel extends React.Component {
           打 Tag
         </Button>
         <Button
-          disabled={model.player === null}
+          disabled={model.songLoaded === false}
           className={classes.button}
           aria-label="rewindAndUntag"
           onClick={this.rewindAndUntag}

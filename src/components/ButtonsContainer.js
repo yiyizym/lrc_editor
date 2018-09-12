@@ -53,6 +53,7 @@ class ButtonsContainer extends React.Component {
   }
   addEventListener = () => {
     if(!model.player) return;
+    model.player.on('load', () => model.songLoaded = true);
     model.player.on('end', () => model.playing = false);
   }
   exportLrc = (e) => {
