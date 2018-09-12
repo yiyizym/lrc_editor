@@ -34,7 +34,6 @@ class PlayPanel extends React.Component {
   }
   makeTag = () => {
     if (!model.player) return;
-    console.log('tag: ', model.player.getPlayedSeconds());
     let targetLyrics = model.rawLyrics[model.indexToBeTagged++];
     if(!targetLyrics){
       console.log('indexToBeTagged out of range!');
@@ -42,16 +41,22 @@ class PlayPanel extends React.Component {
     }
     targetLyrics['time'] = model.player.getPlayedSeconds();
   }
+  unTag = () => {
+    if (!model.indexToBeTagged) return;
+    let targetIndex = model.indexToBeTagged - 1;
+    while (targetIndex > -1 && model.rawLyrics[targetIndex]['time'] > model.player.getPlayedSeconds()){
+      model.rawLyrics[targetIndex]['time'] = '';
+      model.indexToBeTagged = targetIndex;
+      targetIndex = model.indexToBeTagged - 1;
+    }
+  }
   rewindAndUntag = () => {
     if (!model.player) return;
     model.player.rewind(2);
-    let targetIndex = Math.max(model.indexToBeTagged - 1, 0);
-    let targetLyrics = model.rawLyrics[targetIndex];
-    if(targetLyrics['time'] > model.player.getPlayedSeconds()){
-      targetLyrics['time'] = '';
-      model.indexToBeTagged = targetIndex;
-    }
+    this.unTag();
+
   }
+
   render() {
     const { classes } = this.props;
     return (

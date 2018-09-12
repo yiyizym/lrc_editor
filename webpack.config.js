@@ -12,7 +12,7 @@ module.exports = {
         }
     },
     devServer: {
-        contentBase: './build',
+        contentBase: './docs',
         hot: true
     },
     module: {
@@ -33,7 +33,7 @@ module.exports = {
         }]
     },
     output: {
-        path: path.resolve(__dirname, 'build'),
+        path: path.resolve(__dirname, 'docs'),
         filename: 'bundle.js'
     },
     plugins: [
@@ -41,7 +41,7 @@ module.exports = {
             title: 'lrc_editor',
             template: 'src/tpl/index.html'
         }),
-        new CleanWebpackPlugin(['build']),
+        new CleanWebpackPlugin(['docs']),
         new webpack.HotModuleReplacementPlugin()
     ]
 };
