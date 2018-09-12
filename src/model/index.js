@@ -16,7 +16,10 @@ class Model {
   }, {
     time: '',
     lyrics: '如果打时间点出错，可以点击"回退"回退歌曲 2 秒及修改位于这段时间内的时间点'
-  }];
+    }, {
+      time: '',
+      lyrics: '制作带翻译的歌词时。翻译跟原文在同一行，与原文用空格隔开，跟在原文后面。'
+    }];
 
   @observable indexToBeTagged = 0;
 
