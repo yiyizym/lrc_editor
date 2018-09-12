@@ -54,7 +54,6 @@ class PlayPanel extends React.Component {
     if (!model.player) return;
     model.player.rewind(2);
     this.unTag();
-
   }
 
   render() {
