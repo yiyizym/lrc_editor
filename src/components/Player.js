@@ -64,7 +64,7 @@ class Player {
   }
 
   getSongName() {
-    return this.rawFile.name;
+    return this.rawFile.name.split('.')[0];
   }
 }
 

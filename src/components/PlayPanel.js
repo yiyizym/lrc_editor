@@ -4,20 +4,17 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import model from '../model';
 import { observer } from 'mobx-react';
-import IconButton from '@material-ui/core/IconButton';
-import PlayIcon from '@material-ui/icons/PlayArrow';
-import ReplayIcon from '@material-ui/icons/Replay';
-import Pause from '@material-ui/icons/Pause';
-import Flag from '@material-ui/icons/Flag';
-import FastRewind from '@material-ui/icons/FastRewind';
+import Button from '@material-ui/core/Button';
 import PlayProgress from './PlayProgress';
 import { formatTime } from '../util/helper';
+import blue from '@material-ui/core/colors/blue';
 
 const styles = theme => ({
   root: {
   },
   button: {
-
+    margin: theme.spacing.unit,
+    color: blue['500']
   }
 })
 
@@ -59,27 +56,30 @@ class PlayPanel extends React.Component {
     const { classes } = this.props;
     return (
       <div className={classes.root}>
-        <IconButton
+        <Button
+          disabled={model.player === null}
           className={classes.button}
           aria-label="Play"
           onClick={this.togglePlaySong}
         >
-          {model.playing ? <Pause /> : this.comeToEnding() ? <ReplayIcon /> : <PlayIcon />}
-        </IconButton>
-        <IconButton
+          {model.playing ? '暂停' : this.comeToEnding() ? '重放' : '播放'}
+        </Button>
+        <Button
+          disabled={model.player === null}
           className={classes.button}
           aria-label="MakeTag"
           onClick={this.makeTag}
         >
-          <Flag/>
-        </IconButton>
-        <IconButton
+          打 Tag
+        </Button>
+        <Button
+          disabled={model.player === null}
           className={classes.button}
           aria-label="rewindAndUntag"
           onClick={this.rewindAndUntag}
         >
-          <FastRewind />
-        </IconButton>
+          回退(2 秒)
+        </Button>
 
         <PlayProgress showUpdateProgress={model.playing} currentProgress={this.getPlayedPecentages}></PlayProgress>
       </div>

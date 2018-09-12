@@ -5,6 +5,7 @@ import Modal from '@material-ui/core/Modal';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
+import blue from '@material-ui/core/colors/blue';
 
 import model from '../model';
 import { observer } from 'mobx-react';
@@ -31,7 +32,12 @@ const styles = theme => ({
   footer: {
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'flex-end'
+    justifyContent: 'flex-end',
+    marginTop: theme.spacing.unit * 4,
+  },
+  btn: {
+    margin: theme.spacing.unit,
+    color: blue['500']
   }
 })
 @observer
@@ -89,13 +95,14 @@ class LyricsModal extends React.Component {
           <div className={classes.footer}>
             <Button
               component="span"
+              className={classes.btn}
               onClick={this.hideModal}
-            >cancel</Button>
+            >取消</Button>
             <Button
               component="span"
-              color="primary"
+              className={classes.btn}
               onClick={this.submitLyrics}
-            >submit</Button>
+            >提交</Button>
           </div>
         </div>
       </Modal>

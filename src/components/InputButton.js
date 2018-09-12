@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
+import blue from '@material-ui/core/colors/blue';
 
 const styles = theme => ({
   root: {
@@ -12,7 +13,7 @@ const styles = theme => ({
     display: 'none',
   },
   button: {
-
+    color: blue['500']
   }
 })
 

@@ -7,6 +7,8 @@ import model from '../model';
 import InputButton from './InputButton';
 import Button from '@material-ui/core/Button';
 import Player from './Player';
+import { formatTime } from "../util/helper";
+import blue from '@material-ui/core/colors/blue';
 
 
 const styles = theme => ({
@@ -30,6 +32,11 @@ const styles = theme => ({
   },
   button: {
     margin: theme.spacing.unit,
+    color: blue['500'],
+  },
+  link: {
+    textDecoration: 'none',
+    color: 'rgba(0, 0, 0, 0.87)',
   }
 })
 
@@ -48,17 +55,32 @@ class ButtonsContainer extends React.Component {
     if(!model.player) return;
     model.player.on('end', () => model.playing = false);
   }
+  exportLrc = (e) => {
+    if(!model.player) return;
+    let link = e.target;
+    if(e.target.tagName == 'SPAN'){
+      link = e.target.parentNode;
+    }
+    link.setAttribute('download', `${model.player.getSongName()}.lrc`);
+    link.setAttribute('href', `data:text/plain;charset=utf-8,${encodeURIComponent(model.rawLyrics.map(item => `${formatTime(item.time)} ${item.lyrics}`).join('\n'))}`);
+  }
   render() {
     const { classes } = this.props;
     return (
       <div className={classes.root}>
-        <InputButton handleUpload={this.createPlayer} />
+        <Button
+          component="a"
+          onClick={this.exportLrc}
+          className={classes.button}>
+          导出歌词
+        </Button>
         <Button
           component="span"
           onClick={() => model.showEditor = true}
           className={classes.button}>
           上传歌词
         </Button>
+        <InputButton handleUpload={this.createPlayer} />
       </div>
     )
   };

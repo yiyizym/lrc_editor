@@ -16,7 +16,9 @@ import { observer } from 'mobx-react';
 
 const styles = theme => ({
   root: {
-    marginTop: theme.spacing.unit * 5
+    marginTop: theme.spacing.unit * 5,
+    maxHeight: '600px',
+    overflowY: 'auto',
   },
   table: {
     width: '100%',
@@ -32,8 +34,8 @@ class LyricsPanel extends React.Component {
           <Table className={classes.table}>
             <TableHead>
               <TableRow>
-                <TableCell>time</TableCell>
-                <TableCell>lycis</TableCell>
+                <TableCell>Time</TableCell>
+                <TableCell>Lycis</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
