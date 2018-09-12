@@ -8,7 +8,10 @@ import IconButton from '@material-ui/core/IconButton';
 import PlayIcon from '@material-ui/icons/PlayArrow';
 import ReplayIcon from '@material-ui/icons/Replay';
 import Pause from '@material-ui/icons/Pause';
+import Flag from '@material-ui/icons/Flag';
+import FastRewind from '@material-ui/icons/FastRewind';
 import PlayProgress from './PlayProgress';
+import { formatTime } from '../util/helper';
 
 const styles = theme => ({
   root: {
@@ -30,7 +33,27 @@ class PlayPanel extends React.Component {
     return model.player.getPlayedPecentages();
   }
   comeToEnding = () => {
-    return this.getPlayedPecentages() - 100 < 0.001;
+    return 100 - this.getPlayedPecentages() < 0.01;
+  }
+  makeTag = () => {
+    if (!model.player) return;
+    console.log('tag: ', model.player.getPlayedSeconds());
+    let targetLyrics = model.rawLyrics[model.indexToBeTagged++];
+    if(!targetLyrics){
+      console.log('indexToBeTagged out of range!');
+      return;
+    }
+    targetLyrics['time'] = model.player.getPlayedSeconds();
+  }
+  rewindAndUntag = () => {
+    if (!model.player) return;
+    model.player.rewind(2);
+    let targetIndex = Math.max(model.indexToBeTagged - 1, 0);
+    let targetLyrics = model.rawLyrics[targetIndex];
+    if(targetLyrics['time'] > model.player.getPlayedSeconds()){
+      targetLyrics['time'] = '';
+      model.indexToBeTagged = targetIndex;
+    }
   }
   render() {
     const { classes } = this.props;
@@ -43,6 +66,21 @@ class PlayPanel extends React.Component {
         >
           {model.playing ? <Pause /> : this.comeToEnding() ? <ReplayIcon /> : <PlayIcon />}
         </IconButton>
+        <IconButton
+          className={classes.button}
+          aria-label="MakeTag"
+          onClick={this.makeTag}
+        >
+          <Flag/>
+        </IconButton>
+        <IconButton
+          className={classes.button}
+          aria-label="rewindAndUntag"
+          onClick={this.rewindAndUntag}
+        >
+          <FastRewind />
+        </IconButton>
+
         <PlayProgress showUpdateProgress={model.playing} currentProgress={this.getPlayedPecentages}></PlayProgress>
       </div>
     )

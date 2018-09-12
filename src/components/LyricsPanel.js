@@ -11,6 +11,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 
 import model from '../model';
+import { formatTime } from '../util/helper';
 import { observer } from 'mobx-react';
 
 const styles = theme => ({
@@ -41,8 +42,9 @@ class LyricsPanel extends React.Component {
                   <TableRow
                     key={index}
                     hover
+                    selected={index == model.indexToBeTagged}
                     >
-                    <TableCell>{item.time}</TableCell>
+                    <TableCell>{formatTime(item.time)}</TableCell>
                     <TableCell>{item.lyrics}</TableCell>
                   </TableRow>
                 );

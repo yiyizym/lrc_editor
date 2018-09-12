@@ -41,6 +41,7 @@ class ButtonsContainer extends React.Component {
       model.player = null;
     }
     model.player = await new Player(file);
+    model.indexToBeTagged = 0;
     this.addEventListener();
   }
   addEventListener = () => {

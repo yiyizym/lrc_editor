@@ -5,15 +5,17 @@ class Model {
   @observable playing = false;
   @observable showEditor = false;
   @observable rawLyrics = [{
-    time: '00:01:96',
-    lyrics: 'here write your lyrics'
-  }, {
-    time: '00:02:96',
+    time: '',
     lyrics: 'here write your lyrics'
   }, {
     time: '',
     lyrics: 'here write your lyrics'
-  }]
+  }, {
+    time: '',
+    lyrics: 'here write your lyrics'
+  }];
+
+  @observable indexToBeTagged = 0;
 }
 
 export default new Model();

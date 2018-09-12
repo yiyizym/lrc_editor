@@ -8,6 +8,7 @@ import TextField from '@material-ui/core/TextField';
 
 import model from '../model';
 import { observer } from 'mobx-react';
+import { formatTime } from '../util/helper';
 
 const styles = theme => ({
   wrapper: {
@@ -42,7 +43,7 @@ class LyricsModal extends React.Component {
     }
   }
   printLyrics = () => {
-    return model.rawLyrics.map(item => `${item.time ? '[' + item.time + ']' : ''} ${item.lyrics}`).join('\n');
+    return model.rawLyrics.map(item => `${formatTime(item.time)} ${item.lyrics}`).join('\n');
   }
   setValue = (event) => {
     let lyrics = event.target.value.split('\n').map(this.parseLyrics);
