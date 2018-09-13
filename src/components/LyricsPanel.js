@@ -9,6 +9,7 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import blue from '@material-ui/core/colors/blue';
 
 import model from '../model';
 import { formatTime } from '../util/helper';
@@ -24,15 +25,44 @@ const styles = theme => ({
     width: '100%',
   },
   timeCell: {
-    cursor: 'pointer'
+    cursor: 'pointer',
+  },
+  currentPlaying: {
+    color: blue['500']
   }
 })
 @observer
 class LyricsPanel extends React.Component {
-
+  constructor(props){
+    super(props);
+    this.state = {
+      currentPlayingIndex: 0
+    }
+  }
+  componentDidMount(){
+    if(!this._frameId){
+      this._frameId = requestAnimationFrame(this.updateCurrentPlayingIndex);
+    }
+  }
+  componentWillUnmount() {
+    cancelAnimationFrame(this._frameId);
+  }
   seekTo = (time) =>{
     if(!model.player) return ;
     model.player.seek(time);
+  }
+  updateCurrentPlayingIndex = () => {
+    if (model.player && model.rawLyrics){
+      for (let index = 0; index < model.rawLyrics.length; index++) {
+        if (model.rawLyrics[index]['time'] > model.player.getPlayedSeconds()){
+          this.setState({
+            currentPlayingIndex: index - 1
+          });
+          break;
+        }
+      }
+    }
+    this._frameId = requestAnimationFrame(this.updateCurrentPlayingIndex);
   }
   render() {
     const { classes } = this.props;
@@ -43,7 +73,7 @@ class LyricsPanel extends React.Component {
             <TableHead>
               <TableRow>
                 <TableCell>Time</TableCell>
-                <TableCell>Lycis</TableCell>
+                <TableCell>Lyrcis</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -53,9 +83,10 @@ class LyricsPanel extends React.Component {
                     key={index}
                     hover
                     selected={index == model.indexToBeTagged}
+                    className={classes.timeCell}
                     >
                     <TableCell
-                      className={classes.timeCell}
+                      className={this.state.currentPlayingIndex == index ? classes.currentPlaying : null}
                       onClick={() => this.seekTo(item.time)}>
                       {formatTime(item.time)}
                     </TableCell>
