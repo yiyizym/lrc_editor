@@ -9,3 +9,14 @@ export const formatTime = function (secs) {
 
   return `[${minutes}:${seconds}]`;
 }
+
+export const parseTime = function(str){
+  let matches = str.match(/(\d{2}):(\d{2}\.\d+)/);
+  if (matches){
+    let minutes = parseInt(matches[1],10);
+    let seconds = parseFloat(matches[2],10);
+    return minutes * 60 + seconds;
+  } else {
+    return 0;
+  }
+}

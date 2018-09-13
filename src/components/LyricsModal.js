@@ -9,7 +9,7 @@ import blue from '@material-ui/core/colors/blue';
 
 import model from '../model';
 import { observer } from 'mobx-react';
-import { formatTime } from '../util/helper';
+import { formatTime, parseTime } from '../util/helper';
 
 const styles = theme => ({
   wrapper: {
@@ -60,7 +60,7 @@ class LyricsModal extends React.Component {
   parseLyrics = (line) => {
     let matches = line.match(/^(?:^\[(.+)\])?(.*)/) || ['',''];
     return {
-      time: matches[1],
+      time: parseTime(matches[1]),
       lyrics: matches[2].trim()
     }
   }
