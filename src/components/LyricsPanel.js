@@ -23,9 +23,17 @@ const styles = theme => ({
   table: {
     width: '100%',
   },
+  timeCell: {
+    cursor: 'pointer'
+  }
 })
 @observer
 class LyricsPanel extends React.Component {
+
+  seekTo = (time) =>{
+    if(!model.player) return ;
+    model.player.seek(time);
+  }
   render() {
     const { classes } = this.props;
     return (
@@ -46,7 +54,11 @@ class LyricsPanel extends React.Component {
                     hover
                     selected={index == model.indexToBeTagged}
                     >
-                    <TableCell>{formatTime(item.time)}</TableCell>
+                    <TableCell
+                      className={classes.timeCell}
+                      onClick={() => this.seekTo(item.time)}>
+                      {formatTime(item.time)}
+                    </TableCell>
                     <TableCell>{item.lyrics}</TableCell>
                   </TableRow>
                 );

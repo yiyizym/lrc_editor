@@ -22,6 +22,10 @@ class Player {
     this.song.pause();
   }
 
+  seek(seconds){
+    this.song.seek(seconds);
+  }
+
   rewind(seconds){
     let currentTime = this.getPlayedSeconds();
     this.song.seek(Math.max(0, currentTime - seconds));

@@ -33,13 +33,13 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, 'docs'),
-    filename: 'bundle.js'
+    filename: 'bundle.[hash].js'
   },
   plugins: [
     new HtmlWebpackPlugin({
       template: 'src/tpl/index.html'
     }),
-    new CleanWebpackPlugin(['docs'], { exclude: ['favicon.ico'] }),
+    (process.env.WEBPACK_MODE != 'development' ? new CleanWebpackPlugin(['docs'], { exclude: ['favicon.ico'] }) : ()=>{}),
     new webpack.HotModuleReplacementPlugin()
   ]
 };

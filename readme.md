@@ -4,8 +4,7 @@ UI/功能 参考 [hieda-lrc-editor](http://heysh.xyz/hieda-lrc-editor/)
 
 **TODO**
 
-- 实现点击某条歌词定位到歌曲的相应时间
-
+- 在歌词面板直接编辑歌词
 
 **license**
 
