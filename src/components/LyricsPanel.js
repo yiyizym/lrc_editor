@@ -73,7 +73,7 @@ class LyricsPanel extends React.Component {
             <TableHead>
               <TableRow>
                 <TableCell>Time</TableCell>
-                <TableCell>Lyrcis</TableCell>
+                <TableCell>Lyrics</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
