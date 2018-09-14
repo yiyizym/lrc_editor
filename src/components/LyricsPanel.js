@@ -52,8 +52,9 @@ class LyricsPanel extends React.Component {
     model.player.seek(time);
   }
   updateCurrentPlayingIndex = () => {
-    if (model.player && model.rawLyrics){
-      for (let index = 0; index < model.rawLyrics.length; index++) {
+    if (model.player && model.rawLyrics && model.playing){
+      let index;
+      for (index = 0; index < model.rawLyrics.length; index++) {
         if (model.rawLyrics[index]['time'] > model.player.getPlayedSeconds()){
           this.setState({
             currentPlayingIndex: index - 1
@@ -61,6 +62,9 @@ class LyricsPanel extends React.Component {
           break;
         }
       }
+      this.setState({
+        currentPlayingIndex: index - 1
+      });
     }
     this._frameId = requestAnimationFrame(this.updateCurrentPlayingIndex);
   }
@@ -84,13 +88,18 @@ class LyricsPanel extends React.Component {
                     hover
                     selected={index == model.indexToBeTagged}
                     className={classes.timeCell}
+                    onClick={() => this.seekTo(item.time)}
                     >
                     <TableCell
                       className={this.state.currentPlayingIndex == index ? classes.currentPlaying : null}
-                      onClick={() => this.seekTo(item.time)}>
+                    >
                       {formatTime(item.time)}
                     </TableCell>
-                    <TableCell>{item.lyrics}</TableCell>
+                    <TableCell
+                      className={this.state.currentPlayingIndex == index ? classes.currentPlaying : null}
+                    >
+                      {item.lyrics}
+                    </TableCell>
                   </TableRow>
                 );
               })}
