@@ -58,7 +58,7 @@ class LyricsModal extends React.Component {
     });
   }
   parseLyrics = (line) => {
-    let matches = line.match(/^(?:^\[(.+)\])?(.*)/) || ['',''];
+    let matches = line.match(/^(?:\[(.+)\])?(.*)/) || ['',''];
     return {
       time: parseTime(matches[1]),
       lyrics: matches[2].trim()
