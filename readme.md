@@ -14,8 +14,6 @@
 
 **TODO**
 
-- 在歌词面板直接编辑歌词
-
 **开发**
 
 - 技术栈：React + mobx + webpack + material-ui + howler

@@ -1,9 +1,10 @@
 import React from 'react';
+import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import model from '../model';
-import { observer } from 'mobx-react';
+import { Observer } from 'mobx-react';
 
 const styles = theme => {
   return {
@@ -22,43 +23,36 @@ const styles = theme => {
   }
 
 };
-@observer
-class PlayProgress extends React.Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      progress: 0
+
+const PlayProgress = (props) => {
+  const [progress, setProgress] = useState(0);
+
+  function updateProgress(){
+    if (props.showUpdateProgress) {
+      setProgress(props.currentProgress())
+      requestAnimationFrame(updateProgress)
     }
   }
-  componentDidUpdate = (prevProps) => {
-    if (this.props.showUpdateProgress !== prevProps.showUpdateProgress){
-      this.updateProgress()
-    }
-  }
-  updateProgress = () => {
-    if (this.props.showUpdateProgress) {
-      let progress = this.props.currentProgress();
-      this.setState({
-        progress: progress
-      });
-      requestAnimationFrame(this.updateProgress)
-    }
-  }
-  render() {
-    const { classes } = this.props;
-    return (
-      <div className={classes.root}>
-        <LinearProgress
+
+  useEffect(() => {
+    updateProgress()
+  }, [props.showUpdateProgress])
+
+  const { classes } = props;
+  return (
+    <div className={classes.root}>
+      <Observer>
+        {() => (<LinearProgress
           classes={{
             colorPrimary: model.songLoaded ? classes.colorPrimary : classes.colorPrimaryNotReady,
             barColorPrimary: classes.barColorPrimary
           }}
           variant="determinate"
-          value={this.state.progress}
-        />
-      </div>
-    );
-  }
+          value={progress}
+        />)}
+      </Observer>
+    </div>
+  )
 }
 
 PlayProgress.propTypes = {
