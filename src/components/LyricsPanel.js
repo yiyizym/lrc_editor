@@ -10,6 +10,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import blue from '@material-ui/core/colors/blue';
+import Editable from './Editable';
 
 import model from '../model';
 import { formatTime } from '../util/helper';
@@ -68,6 +69,9 @@ class LyricsPanel extends React.Component {
     }
     this._frameId = requestAnimationFrame(this.updateCurrentPlayingIndex);
   }
+  updateLyrics = (index, text) => {
+    text && (model.rawLyrics[index] = text)
+  }
   render() {
     const { classes } = this.props;
     return (
@@ -87,18 +91,18 @@ class LyricsPanel extends React.Component {
                     key={index}
                     hover
                     selected={index == model.indexToBeTagged}
-                    className={classes.timeCell}
-                    onClick={() => this.seekTo(item.time)}
                     >
                     <TableCell
-                      className={this.state.currentPlayingIndex == index ? classes.currentPlaying : null}
+                      className={`${classes.timeCell} ${this.state.currentPlayingIndex == index ? classes.currentPlaying : null}`}
+                      onClick={() => this.seekTo(item.time)}
+                      title="seek to this time"
                     >
                       {formatTime(item.time)}
                     </TableCell>
                     <TableCell
                       className={this.state.currentPlayingIndex == index ? classes.currentPlaying : null}
                     >
-                      {item.lyrics}
+                      <Editable text={item.lyrics} onSubmit={(text) => this.updateLyrics(index, text)} />
                     </TableCell>
                   </TableRow>
                 );

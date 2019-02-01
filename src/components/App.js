@@ -1,26 +1,26 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import CssBaseline from '@material-ui/core/CssBaseline';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import CssBaseline from '@material-ui/core/CssBaseline'
 
-import ControllPanel from './ControllPanel';
-import LyricsPanel from './LyricsPanel';
-import LyricsModal from './LyricsModal';
+import ControllPanel from './ControllPanel'
+import LyricsPanel from './LyricsPanel'
+import LyricsModal from './LyricsModal'
 
-function App() {
-    return (
-        <React.Fragment>
-            <CssBaseline>
-                <div style={{
-                    width: '80vw',
-                    margin: '0 auto'
-                }}>
-                    <ControllPanel></ControllPanel>
-                    <LyricsPanel></LyricsPanel>
-                </div>
-            <LyricsModal></LyricsModal>
-            </CssBaseline>
-        </React.Fragment>
-    );
+function App () {
+  return (
+    <React.Fragment>
+      <CssBaseline>
+        <div style={{
+          width: '80vw',
+          margin: '0 auto'
+        }}>
+          <ControllPanel />
+          <LyricsPanel />
+        </div>
+        <LyricsModal />
+      </CssBaseline>
+    </React.Fragment>
+  )
 }
 
-export default App;
+export default App
