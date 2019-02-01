@@ -5,6 +5,7 @@ import Typography from '@material-ui/core/Typography'
 import blue from '@material-ui/core/colors/blue'
 import CreateIcon from '@material-ui/icons/Create'
 import DoneIcon from '@material-ui/icons/Done'
+import Input from '@material-ui/core/Input'
 
 const styles = theme => ({
   root: {
@@ -20,6 +21,11 @@ const styles = theme => ({
   hide: {
     display: 'none'
   },
+  cssUnderline: {
+    '&:after': {
+      borderBottomColor: blue[500],
+    },
+  },
   text: {
 
   }
@@ -34,11 +40,8 @@ class Editable extends React.Component {
       inputShow: false
     }
   }
-  showIcon () {
-    this.setState({ iconShow: true })
-  }
-  hideIcon () {
-    this.setState({ iconShow: false })
+  toggleIcon (showIcon) {
+    this.setState({ iconShow: showIcon })
   }
   showInput () {
     this.setState({ inputShow: true })
@@ -66,15 +69,18 @@ class Editable extends React.Component {
     return (
       <div
         className={classes.root}
-        onMouseEnter={() => this.showIcon()}
-        onMouseLeave={() => this.hideIcon()}
+        onMouseEnter={() => this.toggleIcon(true)}
+        onMouseLeave={() => this.toggleIcon(false)}
       >
         { this.renderIcon(classes) }
-        <input
+        <Input
           className={inputShow ? '' : classes.hide}
           value={text}
           onChange={(e) => this.handleInput(e.target)}
-          type='text'
+          fullWidth
+          classes={{
+            underline: classes.cssUnderline,
+          }}
         />
         <Typography className={inputShow ? classes.hide : ''} component='p' >
           {text}
