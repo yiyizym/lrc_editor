@@ -28,7 +28,7 @@ class Player {
 
   rewind(seconds){
     let currentTime = this.getPlayedSeconds();
-    this.song.seek(Math.max(0, currentTime - seconds));
+    this.song.seek(Math.max(0, currentTime - Math.max(0, seconds)));
   }
 
   isPlaying() {

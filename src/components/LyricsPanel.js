@@ -48,9 +48,13 @@ class LyricsPanel extends React.Component {
   componentWillUnmount() {
     cancelAnimationFrame(this._frameId);
   }
-  seekTo = (time) =>{
+  seekToOneSecondBefore = (time) =>{
     if(!model.player) return ;
-    model.player.seek(time);
+    model.player.seek(time - 1);
+  }
+  setTimeAndTagIndex = (time, index) => {
+    this.seekToOneSecondBefore(time)
+    model.indexToBeTagged = index
   }
   updateCurrentPlayingIndex = () => {
     if (model.player && model.rawLyrics && model.playing){
@@ -70,7 +74,7 @@ class LyricsPanel extends React.Component {
     this._frameId = requestAnimationFrame(this.updateCurrentPlayingIndex);
   }
   updateLyrics = (index, text) => {
-    text && (model.rawLyrics[index] = text)
+    text && (model.rawLyrics[index].lyrics = text)
   }
   render() {
     const { classes } = this.props;
@@ -94,15 +98,16 @@ class LyricsPanel extends React.Component {
                     >
                     <TableCell
                       className={`${classes.timeCell} ${this.state.currentPlayingIndex == index ? classes.currentPlaying : null}`}
-                      onClick={() => this.seekTo(item.time)}
-                      title="seek to this time"
+                      onClick={() => this.setTimeAndTagIndex(item.time, index)}
+                      title="跳转到这个时间之前 1 秒"
                     >
                       {formatTime(item.time)}
                     </TableCell>
                     <TableCell
                       className={this.state.currentPlayingIndex == index ? classes.currentPlaying : null}
                     >
-                      <Editable text={item.lyrics} onSubmit={(text) => this.updateLyrics(index, text)} />
+                      {/* https://reactjs.org/blog/2018/06/07/you-probably-dont-need-derived-state.html */}
+                      <Editable text={item.lyrics} key={item.lyrics} onSubmit={(text) => this.updateLyrics(index, text)} />
                     </TableCell>
                   </TableRow>
                 );
