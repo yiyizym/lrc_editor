@@ -1,6 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const CleanWebpackPlugin = require('clean-webpack-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const webpack = require('webpack')
 
 module.exports = {
@@ -12,7 +12,8 @@ module.exports = {
   },
   devServer: {
     contentBase: './docs',
-    hot: true
+    hot: true,
+    port: 3000
   },
   module: {
     rules: [{
@@ -39,7 +40,12 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: 'src/tpl/index.html'
     }),
-    (process.env.WEBPACK_MODE != 'development' ? new CleanWebpackPlugin(['docs'], { exclude: ['favicon.ico'] }) : ()=>{}),
+    (process.env.WEBPACK_MODE != 'development' ? new CleanWebpackPlugin({
+      cleanOnceBeforeBuildPatterns: [
+        '**/*',
+        '!favicon.ico'
+      ]
+    }) : ()=>{}),
     new webpack.HotModuleReplacementPlugin()
   ]
 };

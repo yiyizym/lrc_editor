@@ -31,7 +31,7 @@ const styles = theme => ({
     right: 0,
   },
   button: {
-    margin: theme.spacing.unit,
+    margin: theme.spacing(1),
     color: blue['500'],
   },
   link: {
@@ -79,7 +79,7 @@ class ButtonsContainer extends React.Component {
           component="span"
           onClick={() => model.showEditor = true}
           className={classes.button}>
-          上传歌词
+          粘贴歌词
         </Button>
         <InputButton handleUpload={this.createPlayer} />
       </div>

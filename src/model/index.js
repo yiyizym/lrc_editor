@@ -1,17 +1,20 @@
-import { observable, computed } from 'mobx';
-
+import { makeAutoObservable } from 'mobx';
 class Model {
-  @observable player = null;
-  @observable songLoaded = false;
-  @observable playing = false;
-  @observable showEditor = false;
-  @observable indexToBeTagged = 0;
-  @observable rawLyrics = [{
+
+  constructor() {
+    makeAutoObservable(this)
+  }
+  player = null;
+  songLoaded = false;
+  playing = false;
+  showEditor = false;
+  indexToBeTagged = 0;
+  rawLyrics = [{
     time: '',
-    lyrics: '请先"上传歌曲"'
+    lyrics: '请先点击"上传歌曲"'
   }, {
     time: '',
-    lyrics: '然后"上传歌词"'
+    lyrics: '然后点击"粘贴歌词"，把歌词复制到弹出框'
   }, {
     time: '',
     lyrics: '"播放"歌曲后，点击"打 TAG"可在灰色底（选中状态）一栏打上时间点。'

@@ -9,7 +9,7 @@ import ButtonsContainer from './ButtonsContainer'
 
 const styles = theme => ({
   root: {
-    marginTop: theme.spacing.unit * 2
+    marginTop: theme.spacing(2)
   }
 })
 

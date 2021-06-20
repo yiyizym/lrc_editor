@@ -7,7 +7,7 @@ import blue from '@material-ui/core/colors/blue'
 
 const styles = theme => ({
   root: {
-    margin: theme.spacing.unit
+    margin: theme.spacing(1)
   },
   input: {
     display: 'none'

@@ -17,14 +17,14 @@ const styles = theme => ({
     top: '50%',
     left: '50%',
     transform: 'translate3d(-50%, -50%, 0)',
-    width: theme.spacing.unit * 100,
+    width: theme.spacing(100),
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
-    padding: theme.spacing.unit * 4,
+    padding: theme.spacing(4),
   },
   main: {
     width: '100%',
-    height: theme.spacing.unit * 20,
+    height: theme.spacing(20),
   },
   rawLyrics: {
 
@@ -33,10 +33,10 @@ const styles = theme => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'flex-end',
-    marginTop: theme.spacing.unit * 4,
+    marginTop: theme.spacing(4),
   },
   btn: {
-    margin: theme.spacing.unit,
+    margin: theme.spacing(1),
     color: blue['500']
   }
 })
@@ -79,7 +79,7 @@ class LyricsModal extends React.Component {
         onClose={this.hideModal}
       >
         <div className={classes.wrapper}>
-          <Typography variant="title">Raw Lyrics</Typography>
+          <Typography variant="subtitle1">Raw Lyrics</Typography>
           <div className={classes.main}>
             <TextField
               className={classes.rawLyrics}

@@ -18,8 +18,8 @@ import { observer } from 'mobx-react';
 
 const styles = theme => ({
   root: {
-    marginTop: theme.spacing.unit * 5,
-    maxHeight: '600px',
+    marginTop: theme.spacing(5),
+    maxHeight: '800px',
     overflowY: 'auto',
   },
   table: {
