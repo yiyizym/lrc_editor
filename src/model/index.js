@@ -4,20 +4,25 @@ class Model {
   constructor() {
     makeAutoObservable(this)
   }
+
   player = null;
   songLoaded = false;
   playing = false;
   showEditor = false;
   indexToBeTagged = 0;
+  
+  showHint = false;
+  hint = '';
+
   rawLyrics = [{
     time: '',
     lyrics: '请先点击"上传歌曲"'
   }, {
     time: '',
-    lyrics: '然后点击"粘贴歌词"，把歌词复制到弹出框'
+    lyrics: '然后点击"粘贴歌词"，把歌词粘贴到弹出框'
   }, {
     time: '',
-    lyrics: '"播放"歌曲后，点击"打 TAG"可在灰色底（选中状态）一栏打上时间点。'
+    lyrics: '"播放"歌曲后，点击"打 TAG"可在红色底（选中状态）一栏打上时间点。'
   }, {
     time: '',
     lyrics: '如果打时间点出错，可以点击"回退(2 秒)"回退歌曲 2 秒及修改位于这段时间内的时间点。'

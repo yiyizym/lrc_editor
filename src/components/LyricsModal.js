@@ -65,6 +65,11 @@ class LyricsModal extends React.Component {
     }
   }
   submitLyrics = () => {
+    if(this.state.value === null) { 
+      model.hint = '请先粘贴歌词到弹窗'
+      model.showHint = true
+      return 
+    }
     model.rawLyrics = this.state.value
     this.hideModal();
   }
@@ -85,7 +90,7 @@ class LyricsModal extends React.Component {
               className={classes.rawLyrics}
               fullWidth={true}
               multiline
-              defaultValue={this.printLyrics()}
+              defaultValue={'请把歌词粘贴到这里\n一句歌词占一行\n这是第三句歌词'}
               onChange={this.setValue}
               rowsMax={7}
               margin="normal"

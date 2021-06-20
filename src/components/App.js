@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import CssBaseline from '@material-ui/core/CssBaseline'
 
+import Hint from './Hint'
 import ControllPanel from './ControllPanel'
 import LyricsPanel from './LyricsPanel'
 import LyricsModal from './LyricsModal'
@@ -9,6 +10,7 @@ import LyricsModal from './LyricsModal'
 function App () {
   return (
     <React.Fragment>
+      <Hint />
       <CssBaseline>
         <div style={{
           width: '80vw',
